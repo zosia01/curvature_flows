@@ -21,10 +21,10 @@ def correct_gradient(G, C, metric, integration_method=midpoint_rule):
 # total curvature energy function for curve-straightening flow
 def curvature_func(curve, metric, integration_method):
   """
-  Returns an approximation of the total curvature.
+  Returns an approximation of the elastic energy (for curve-straightening flow).
   """
   grad_len = jit(grad(lambda curve: length_func(curve, metric, integration_method)))
   G = jit(lambda x: correct_gradient(grad_len(x), x, metric))
   grads = G(curve)
   ki_arr = vmap(lambda L_grad, p: jnp.matmul(L_grad, jnp.matmul(metric(p), L_grad)))(grads, curve)
-  return jnp.sum(jnp.multiply(length_elements(curve, metric),ki_arr))
+  return (1/2)*jnp.sum(jnp.multiply(length_elements(curve, metric),ki_arr))
