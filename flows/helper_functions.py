@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from flows.energies_grads import correct_gradient
 from flows.metrics import length_func
-from integration_methods import midpoint_rule
+from flows.integration_methods import midpoint_rule
 import numpy as np
 import jax.numpy as jnp
 from jax import grad, jit, vmap
