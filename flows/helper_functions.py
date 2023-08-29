@@ -28,4 +28,4 @@ def smooth_f(x):
 def smoothstep(x, r1=0, r2=1):
   y = (x-r1)/(r2-r1)
   f = 3*(y**2)-2*(y**3)
-  return jnp.where(x<1,jnp.where(x<0, 0, f), 1)
+  return jnp.where(y<1,jnp.where(y<0, 0, f), 1)
