@@ -27,7 +27,7 @@ def smooth_f(x):
   #  return np.exp(-1/x)
   #else:
   #  return 0.
-  return jnp.where(x>=0., jnp.exp(-1/x), 0.)
+  return jnp.where(x>0., jnp.exp(-1/x), 0.)
 
 def smoothstep(x, r1=0, r2=1):
   '''
