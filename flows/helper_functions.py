@@ -36,8 +36,10 @@ def smoothstep(x, r1=0, r2=1):
   0 < smoothstep(x, r1, r2) < 1 for r1 < x < r2
   smoothstep(x, r1, r2) = 1 for x > r2
   '''
-  o = r1
-  s = 1/(r2-r1)
-  t = smooth_f(s*(x-o))
-  return t/(t+smooth_f(1-(s*(x-o))))
-
+  #o = r1
+  #s = 1/(r2-r1)
+  #t = smooth_f(s*(x-o))
+  #return t/(t+smooth_f(1-(s*(x-o))))
+  y = (x-r1)/(r2-r1)
+  f = 3*(y**2)-2*(y**3)
+  return jnp.where(x<1,jnp.where(x<0, 0, f), 1)
