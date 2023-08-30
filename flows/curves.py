@@ -41,7 +41,7 @@ def discretize_curve(curve, n, rng, closed_curve=True):
   """
   if closed_curve:
     t = jnp.linspace(rng[0], rng[-1]-(rng[-1]-rng[0])/n, n)
-    points = curve(t)
+    points = jnp.array(curve(t))
 
     return  jnp.transpose(points)
   else:
