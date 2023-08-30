@@ -31,7 +31,7 @@ def scale_function(func, s):
     return (o[0]*s, o[1]*s)
   return out
 
-def discretize_curve(curve, n, range, closed_curve=True):
+def discretize_curve(curve, n, rng, closed_curve=True):
   """
   Return : An array of [xval, yval]
   Inputs:
@@ -40,12 +40,12 @@ def discretize_curve(curve, n, range, closed_curve=True):
       range : a tuple (start,stop)
   """
   if closed_curve:
-    t = jnp.linspace(range[0], range[-1]-(range[-1]-range[0])/n, n)
+    t = jnp.linspace(rng[0], rng[-1]-(rng[-1]-rng[0])/n, n)
     points = curve(t)
 
     return  jnp.transpose(points)
   else:
-    t = jnp.linspace(range[0], range[-1], n)
+    t = jnp.linspace(rng[0], rng[-1], n)
     points = curve(t)
     return jnp.transpose(points)
 
