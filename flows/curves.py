@@ -9,10 +9,10 @@ def line(t):
   return (t,t)
 
 def circle(t):
-  return (np.cos(t), np.sin(t))
+  return (jnp.cos(t), jnp.sin(t))
 
 def shifted_circle(t, v):
-  return (np.cos(t) + v[0], np.sin(t) + v[1])
+  return (jnp.cos(t) + v[0], jnp.sin(t) + v[1])
 
 def level_circle_x(t, x):
   """
@@ -31,7 +31,7 @@ def scale_function(func, s):
     return (o[0]*s, o[1]*s)
   return out
 
-def discretize_curve(curve, n, range, closed_curve=True):
+def discretize_curve(curve, n, rng, closed_curve=True):
   """
   Return : An array of [xval, yval]
   Inputs:
@@ -40,14 +40,14 @@ def discretize_curve(curve, n, range, closed_curve=True):
       range : a tuple (start,stop)
   """
   if closed_curve:
-    t = np.linspace(range[0], range[-1]-(range[-1]-range[0])/n, n)
-    points = curve(t)
+    t = jnp.linspace(rng[0], rng[-1]-(rng[-1]-rng[0])/n, n)
+    points = jnp.array(curve(t))
 
-    return  np.transpose(points)
+    return  jnp.transpose(points)
   else:
-    t = np.linspace(range[0], range[-1], n)
+    t = jnp.linspace(rng[0], rng[-1], n)
     points = curve(t)
-    return np.transpose(points)
+    return jnp.transpose(points)
 
 def discretize_curve2(curve, n, rnge, closed_curve=True, metric=dot_product):
   """
@@ -61,8 +61,8 @@ def discretize_curve2(curve, n, rnge, closed_curve=True, metric=dot_product):
       rnge : a tuple (start,stop)
   """
   if closed_curve:
-    t = np.linspace(rnge[0], rnge[-1]-(rnge[-1]-rnge[0])/n, n)
-    points = np.transpose(np.array(curve(t)))
+    t = jnp.linspace(rnge[0], rnge[-1]-(rnge[-1]-rnge[0])/n, n)
+    points = jnp.transpose(jnp.array(curve(t)))
     L = edge_lengths(points, metric)
 
     accumulator = 0
@@ -91,12 +91,12 @@ def discretize_curve2(curve, n, rnge, closed_curve=True, metric=dot_product):
       curr_float = n_float
       desired += increment
 
-    T = rnge[0] + (np.array(OUT)/n)*(rnge[1]-rnge[0])
-    points = np.transpose(curve(T))
+    T = rnge[0] + (jnp.array(OUT)/n)*(rnge[1]-rnge[0])
+    points = jnp.transpose(curve(T))
 
 
     return points
   else:
-    t = np.linspace(range[0], range[-1], n)
+    t = jnp.linspace(range[0], range[-1], n)
     points = curve(t)
-    return np.transpose(points)
+    return jnp.transpose(points)
