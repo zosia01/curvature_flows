@@ -29,3 +29,19 @@ def smoothstep(x, r1=0, r2=1):
   y = (x-r1)/(r2-r1)
   f = 6*(y**5)-15*(y**4)+10*(y**3)#3*(y**2)-2*(y**3)
   return jnp.where(y<1,jnp.where(y<0, 0, f), 1)
+
+def plot_curve_and_velocities(curve, velocities, velocities2=None, scale=1., plotter=plt, curve_color=(0.,0.,0.), velocities_color=(1.,0.,0.), velocities2_color=(0.,1.,0.)):
+  '''
+    plots the curve given by `curve` (a (N,2) jnp.array) and velocities (another (N,2) jnp.array)
+  '''
+  if plotter == plt:
+    plotter.gca().set_aspect('equal')
+  
+  plotter.plot(curve[:,0], curve[:,1], color=curve_color)
+  plotter.plot([curve[-1,0],curve[0,0]],[curve[-1,1],curve[0,1]], color=curve_color)
+  for i in range(len(velocities)):
+    plotter.plot([curve[i,0],curve[i,0]+scale*velocities[i,0]],[curve[i,1],curve[i,1]+scale*velocities[i,1]], color=velocities_color)
+  
+  if not(velocities2 == None):
+    for i in range(len(velocities)):
+      plotter.plot([curve[i,0],curve[i,0]+scale*velocities2[i,0]],[curve[i,1],curve[i,1]+scale*velocities2[i,1]], color=velocities2_color)
