@@ -26,29 +26,12 @@ def mercator_metric(p):
   """
   return np.array([1,0], [0, (jnp.sin(p[0])**2)])
 
-def torus_metric(v, w, p):
+def get_torus_metric(r,R):
   """
-  Apply the 2-torus (with minor radius r and major radius R) metric tensor at a point (p) on two vectors (v and w).
-
+    Returns torus metric function for the given values of r and R
   """
-  r = 1
-  R = 2
-  g_p = (r*r)*(v[1]*w[1]) + ((R+r*jnp.cos(p[1])**2)*(v[0]*w[0]))
-  return g_p
-
-def get_torus_metric(chart_size, chart_origin, R, r):
-  """
-    Inputs:
-      chart_size <- sidelength of square
-      chart_origin <- vector (x_0, y_0)
-      R, r <- major and minor radius of torus
-
-    Metric for chart where x axis maps to the big circle of radius R+r around the z axis,
-    and the y axis maps to the little circle of radius r
-  """
-  s = jnp.pi*2 / chart_size
-  def out(v,w,p):
-    return ( ((R+r*(jnp.cos((p[1]-chart_origin[1])*s)))**2)*(v[0]*w[0]) + (r*r)*(v[1]*w[1]))*s*s
+  def out(p):
+    return np.array([[(R+r*jnp.cos(p[1]))**2,0.],[0.,r*r]])
   return out
 
 def dot_product(p):
