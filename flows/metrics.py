@@ -31,7 +31,7 @@ def get_torus_metric(r,R):
     Returns torus metric function for the given values of r and R
   """
   def out(p):
-    return np.array([[(R+r*jnp.cos(p[1]))**2,0.],[0.,r*r]])
+    return jnp.array([[(R+r*jnp.cos(p[1]))**2,0.],[0.,r*r]])
   return out
 
 def dot_product(p):
