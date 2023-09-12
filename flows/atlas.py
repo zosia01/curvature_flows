@@ -2,8 +2,8 @@ import jax.numpy as jnp
 from jax import grad, jit, vmap
 import matplotlib.pyplot as plt
 from flows.helper_functions import get_correct_gradient_function, plot_curve
-from metrics import length_elements
-from integration_methods import midpoint_rule, trapezoidal_rule
+from flows.metrics import length_elements
+from flows.integration_methods import midpoint_rule, trapezoidal_rule
 import numpy as np
 
 class Chart:
