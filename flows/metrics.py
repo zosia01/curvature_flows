@@ -37,7 +37,6 @@ def get_torus_metric(r,R):
 def dot_product(p):
   """
   Apply the dot product metric tensor at a point (p) on two vectors (v and w).
-
   """
   return np.identity(2)
 
