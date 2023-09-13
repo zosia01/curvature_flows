@@ -215,7 +215,6 @@ class Atlas:
 
     return jnp.array(out_x), jnp.array(out_y)
 
-
   def calculate_velocities(self):
     self.curve_velocities = self.calculate_velocities_pure(self.curve_coordinates, self.active_guys)
 
