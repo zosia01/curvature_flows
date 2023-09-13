@@ -40,12 +40,12 @@ def plot_curve_and_velocities(curve, velocities, velocities2=None, scale=1., plo
       plotter.xlim(xlim[0],xlim[1])
     if not(ylim==None):
       plotter.ylim(ylim[0],ylim[1])
-  if plotter == ax:
-    if not(xlim==None):
-      plotter.set_xlim(xlim[0],xlim[1])
-    if not(ylim==None):
-      plotter.set_ylim(ylim[0],ylim[1])
-    plotter.set_aspect('equal')
+  #if plotter == ax:
+  #  if not(xlim==None):
+  #    plotter.set_xlim(xlim[0],xlim[1])
+  #  if not(ylim==None):
+  #    plotter.set_ylim(ylim[0],ylim[1])
+  #  plotter.set_aspect('equal')
 
   plotter.scatter(curve[:,0], curve[:,1], color=curve_color, s=7)
   plotter.plot(curve[:,0], curve[:,1], color=curve_color)
