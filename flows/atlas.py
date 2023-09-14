@@ -222,9 +222,20 @@ class Atlas:
     return self.pure_make_consistent_vector_field(self.curve_coordinates, self.active_guys)
 
   def set_curve(self, curve_coordinates, active_guys):
-    self.curve_coordinates = jnp.array(curve_coordinates)
+    C = jnp.array(curve_coordinates)
+    A = jnp.array(active_guys)
+    if C.shape < 3:
+      print('only provided a single curve / wrong curve shape')
+      return
+    if C.shape[0] != self.number_of_charts:
+      print('number of curves does not equal number of charts')
+      return
+    if A.shape[0] != C.shape[0]:
+      print('not enough active guys for every curve')
+      return
+    self.curve_coordinates = C
     self.N = self.curve_coordinates.shape[1]
-    self.active_guys = jnp.logical_and( jnp.array(active_guys), self.get_indicator_function() )
+    self.active_guys = jnp.logical_and( A, self.get_indicator_function() )
     self.G = jit(grad(lambda x: self.L(x)))
     self.pure_G = jit(grad(self.pure_L, argnums=0))
     self.jitted_take_a_step = jit(self.pure_take_a_step)
