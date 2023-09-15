@@ -53,6 +53,12 @@ def angenent_metric(p):
   return (1/4)*(r**2*jnp.exp(-(r**2+z**2)/2))*jnp.identity(2)
 
 
+def hyperbolic_metric(p):
+  """
+  Returns the Poincare metric matrix.
+  """
+  return (1/p[1]**2)*jnp.identity(2)
+
 
 def length_func(curve, metric, integration_method):
   """
