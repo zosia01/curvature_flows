@@ -17,7 +17,6 @@ def correct_gradient(G, C, metric, integration_method=midpoint_rule):
   out = vmap(lambda x, m: jnp.matmul(x, m))(G, M)
   return jnp.einsum('ij,i->ij', out, L)
 
-
 # total curvature energy function for curve-straightening flow
 def curvature_func(curve, metric, integration_method):
   """
