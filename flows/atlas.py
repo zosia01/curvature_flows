@@ -224,7 +224,7 @@ class Atlas:
   def set_curve(self, curve_coordinates, active_guys):
     C = jnp.array(curve_coordinates)
     A = jnp.array(active_guys)
-    if C.shape < 3:
+    if len(C.shape) < 3:
       print('only provided a single curve / wrong curve shape')
       return
     if C.shape[0] != self.number_of_charts:
