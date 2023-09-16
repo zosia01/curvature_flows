@@ -14,6 +14,15 @@ def circle(t):
 def shifted_circle(t, v):
   return (jnp.cos(t) + v[0], jnp.sin(t) + v[1])
 
+def banana(t):
+  return ((1+0.4*np.cos(t))*np.cos(3.14*np.sin(t)), (1+0.4*np.cos(t))*np.sin(3.14*np.sin(t)))
+
+def dumbbell(t):
+  """
+    Range should be [0, 2PI)
+  """
+  return (2.7*np.cos(t), np.sin(t)+0.9*np.sin(3*t))
+
 def level_circle_x(t, x):
   """
   Return a level unit circle at x in R^3
